@@ -1,0 +1,48 @@
+diff --git a/src/default.c b/src/default.c
+index fffff8b..f78c66b 100644
+--- a/src/default.c
++++ b/src/default.c
+@@ -48,7 +48,7 @@ static char default_suffixes[]
+ .mod .sym .def .h .info .dvi .tex .texinfo .texi .txinfo \
+ .w .ch .web .sh .elc .el .obj .exe .dll .lib";
+ #else
+-  = ".out .a .ln .o .c .cc .C .cpp .p .f .F .m .r .y .l .ym .yl .s .S \
++  = ".out .a .ln .o .c .cc .C .cpp .d .p .f .F .m .r .y .l .ym .yl .s .S \
+ .mod .sym .def .h .info .dvi .tex .texinfo .texi .txinfo \
+ .w .ch .web .sh .elc .el";
+ #endif
+@@ -279,6 +279,8 @@ static const char *default_suffix_rules[] =
+     "$(LINK.C) $^ $(LOADLIBES) $(LDLIBS) -o $@",
+     ".cpp",
+     "$(LINK.cpp) $^ $(LOADLIBES) $(LDLIBS) -o $@",
++    ".d",
++    "$(LINK.d) $^ $(LOADLIBES) $(LDLIBS) -o $@",
+     ".f",
+     "$(LINK.f) $^ $(LOADLIBES) $(LDLIBS) -o $@",
+     ".m",
+@@ -310,6 +312,8 @@ static const char *default_suffix_rules[] =
+     "$(COMPILE.C) $(OUTPUT_OPTION) $<",
+     ".cpp.o",
+     "$(COMPILE.cpp) $(OUTPUT_OPTION) $<",
++    ".d.o",
++    "$(COMPILE.d) $(OUTPUT_OPTION) $<",
+     ".f.o",
+     "$(COMPILE.f) $(OUTPUT_OPTION) $<",
+     ".m.o",
+@@ -546,6 +550,7 @@ static const char *default_variables[] =
+     "COFLAGS", "",
+ 
+     "CPP", "$(CC) -E",
++    "DC", "gdc",
+ #ifdef  CRAY
+     "CF77PPFLAGS", "-P",
+     "CF77PP", "/lib/cpp",
+@@ -623,6 +628,8 @@ static const char *default_variables[] =
+     "LINK.C", "$(LINK.c)",
+ #endif
+     "LINK.cpp", "$(LINK.cc)",
++    "COMPILE.d", "$(DC) $(DFLAGS) $(TARGET_ARCH) -c",
++    "LINK.d", "$(DC) $(DFLAGS) $(LDFLAGS) $(TARGET_ARCH)",
+     "YACC.y", "$(YACC) $(YFLAGS)",
+     "LEX.l", "$(LEX) $(LFLAGS) -t",
+     "YACC.m", "$(YACC) $(YFLAGS)",
