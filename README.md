@@ -1,5 +1,17 @@
 gmake-d
 =======
+
+TL;DR
+-----
+Want a new copy of GNU Make with built-in D support? Clone, build,
+and install.
+
+Would you rather use your existing copy of GNU Make and `include` a
+small `.mk` file for D support? All you need is [dlang.mk](dlang.mk).
+Download it into your own repository and you are good.
+
+Adding D to GNU Make
+--------------------
 This repo contains a vanilla copy of GNU Make with defaults for D set.
 
 This allows you to write standard Makefiles for use with D code.
